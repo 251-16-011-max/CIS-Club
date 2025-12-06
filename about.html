@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIS Club — About</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+}
+
+/* ---------- NAVBAR ---------- */
+header {
+    background: #1e3a8a;
+    color: white;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 26px;
+    letter-spacing: 1px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+nav a:hover {
+    background: #2563eb;
+}
+
+/* ---------- SECTION STYLES ---------- */
+section {
+    width: 90%;
+    margin: 50px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+section h2 {
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+/* ---------- TEAM CARDS ---------- */
+.team-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.team-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.team-card img {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid #ccc;
+}
+
+.team-card .info {
+    padding: 15px;
+    text-align: center;
+}
+
+.team-card .info h3 {
+    margin: 10px 0 5px;
+    color: #1e3a8a;
+}
+
+.team-card .info p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* 3D hover effect */
+.team-card:hover {
+    transform: rotateY(15deg) rotateX(5deg) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* FOOTER */
+footer {
+    background: #484343;
+    padding: 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.join-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #466bbb;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 20px;
+    transition: background 0.3s;
+}
+
+.join-btn:hover {
+    background: #1e40af;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CIS Club</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="events.html">Events</a>
+    <a href="members.html">Join</a>
+    <a href="resource.html">Resources</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+   
+  </nav>
+</header>
+
+<!-- MISSION SECTION -->
+<section id="mission">
+    <h2>Our Mission</h2>
+    <p>The CIS Club aims to foster a culture of innovation, collaboration, and continuous learning among students of Computing and Information Systems at DIU. We promote practical skills in programming, AI, networking, and emerging technologies. We provide a platform for students to showcase projects, collaborate, and solve real-world problems, while inspiring leadership, teamwork, and creativity.</p>
+</section>
+
+<!-- HISTORY SECTION -->
+<section id="history">
+    <h2>History</h2>
+    <p>The CIS Club was founded at Daffodil International University (DIU) to connect students passionate about computing and technology. Over the years, the club has organized coding competitions, hackathons, and workshops. We have partnered with industry professionals to provide mentorship and built a strong community of students dedicated to innovation and problem-solving.</p>
+</section>
+
+<!-- TEAM MEMBERS SECTION -->
+<section id="team">
+    <h2>Team Members</h2>
+    <div class="team-container">
+        <div class="team-card">
+            <img src="Committe/sarwar.jpg" alt="Member 1">
+            <div class="info">
+                <h3>Md.sarwar hossain mollah</h3>
+                <p>Advisor</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/Israfil.jpg"Member 2">
+            <div class="info">
+                <h3>Convener</h3>
+                <p>Mr.israfil</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/mehedi.jpg"Member 3">
+            <div class="info">
+                <h3>Md.mehedi hassan</h3>
+                <p>Advisor</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/tamanna.jpg" alt="Member 4">
+            <div class="info">
+                <h3>Tamanna Akter</h3>
+                <p>Co-convener</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/mabia.jpg" alt="Member 5">
+            <div class="info">
+                <h3>Mabiya Akonda jemi</h3>
+                <p>President</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/pisah.jpg" alt="Member 6">
+            <div class="info">
+                <h3>Arifulhaque Piash</h3>
+                <p>vice-presedent</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/sinthi.jpg" alt="Member 7">
+            <div class="info">
+                <h3>Shithian islam ritu</h3>
+                <p>Vice-precendent</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/delower.jpg" alt="Member 8">
+            <div class="info">
+                <h3>Delower hussain</h3>
+                <p>Vice-president</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/atik.jpg" alt="Member 9">
+            <div class="info">
+                <h3>Arafin Atiq</h3>
+                <p>Genarel secretary</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/nahian.jpg" alt="Member 10">
+            <div class="info">
+                <h3>Samiul Hauque ann nahian</h3>
+                <p>joint secretary</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/sami.jpg"alt="Member 2">
+            <div class="info">
+                <h3>Md.samul islam</h3>
+                <p>Joint secretary</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/shimu.jpg" alt="Member 3">
+            <div class="info">
+                <h3>shumaia jaman shimu</h3>
+                <p>joint secretary</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/disha.jpg"alt="Member 4">
+            <div class="info">
+                <h3>sanjana noor Disha</h3>
+                <p>Treasurer</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/akash.jpg" alt="Member 5">
+            <div class="info">
+                <h3>Jobied chowdhury</h3>
+                <p>organizing secretary</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/nusrat.jpg"alt="Member 6">
+            <div class="info">
+                <h3>Nusrat jahan jitu</h3>
+                <p>De[uty organizing secretary</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/pallab.jpg" alt="Member 7">
+            <div class="info">
+                <h3>Indrojit sarkar pallab</h3>
+                <p>Deputy organizing srcretary</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/sithil.jpg" alt="Member 8">
+            <div class="info">
+                <h3>Md.Mahid alam marin</h3>
+                <p>Deputy orarganizing secretary</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/samin_ur_rahman.jpg"alt="Member 9">
+            <div class="info">
+                <h3>T.M. samin ur rahaman</h3>
+                <p>Design secretary</p>
+            </div>
+        </div>
+        <div class="team-card">
+            <img src="Committe/golam_rabbi.jpg"alt="Member 10">
+            <div class="info">
+                <h3>Deputy design secretary</h3>
+                <p>Golam rabbi</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/nafisa_nusrat.jpg"alt="Member 10">
+            <div class="info">
+                <h3>Nafisha tabassum nusrat</h3>
+                <p>deputy disign secretary</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/ruhit.jpg"alt="Member 10">
+            <div class="info">
+                <h3>Md.mushfiqul islam ruhit</h3>
+                <p>Media secretary</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/rayhan.jpg"alt="Member 10">
+            <div class="info">
+                <h3>Md.rayhan parvaz</h3>
+                <p>Deputy media secretary</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/masud.jpg"alt="Member 10">
+            <div class="info">
+                <h3>Masudur rahman</h3>
+                <p>Editor</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/tasnim.jpg"alt="Member 10">
+            <div class="info">
+                <h3>Tabassum akter tasnim</h3>
+                <p>cultural secretary</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/pranto.jpg"alt="Member 10">
+            <div class="info">
+                <h3>Md.Abdul ahad pranto</h3>
+                <p>deputy cultural secretary</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/sajjad.jpg"alt="Member 10">
+            <div class="info">
+                <h3>Sajjad hossain</h3>
+                <p>sport secretary</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/fuad_fahim.jpg"alt="Member 10">
+            <div class="info">
+                <h3>deputy sport secretary</h3>
+                <p>Md.fuad hasan fahim</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/jakaria_fahim.jpg"alt="Member 10">
+            <div class="info">
+                <h3>Md.jakaria hossin fahim</h3>
+                <p>Press secretary</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/jannatul_bony.jpg"alt="Member 10">
+            <div class="info">
+                <h3>Janatul Ferdous Bony</h3>
+                <p>Secretary of public relation</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/shehabul_alam.jpg"alt="Member 10">
+            <div class="info">
+                <h3>Md.shehababul alam</h3>
+                <p>Deputy secretary of public relations</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/Pushpita.jpg"alt="Member 10">
+            <div class="info">
+                <h3>pushpita halder isha</h3>
+                <p>Deputy secretary of public relations</p>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <img src="Committe/tahsin.jpg"alt="Member 10">
+            <div class="info">
+                <h3>S.m.Tahsin ul karim</h3>
+                <p>deputy secretary of public reletions</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <!-- Location Section -->
+        <div class="footer-location">
+            <h3>Daffodil International University</h3>
+            <p>102/1, Sukrabad, Mirpur Road, Dhaka 1207, Bangladesh</p>
+        </div>
+
+        <!-- Contact Button -->
+        <div class="footer-contact">
+            <a href="contact.html" class="contact-btn">Contact Us</a>
+        </div>
+
+        <!-- Social Icons -->
+         <div class="footer-social">
+            <a href="https://www.facebook.com/CIS.DIU" target="_blank" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+            </a>
+            <a href="https://chat.whatsapp.com/KmBSnW1gGSd1gLxcMAb94D" target="_blank" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+            </a>
+            <a href="mailto:cisclub@diu.edu.bd" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email">
+            </a>
+        </div>
+    </div>
+    <p class="footer-bottom">&copy; 2025 CIS Club. All Rights Reserved.</p>
+</footer>
+<script src="script.js"></script>
+
+</body>
+</html>

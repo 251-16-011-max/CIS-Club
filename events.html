@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CIS Club — Events</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ---------- BASE ---------- */
+  :root {
+    --primary: #1e3a8a;
+    --primary-dark: #1e40af;
+    --accent: #ff4b5c;
+    --bg: #f3f4f6;
+  }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #222;
+  }
+
+  /* ---------- NAVBAR ---------- */
+  header {
+    background: var(--primary);
+    color: white;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+  }
+  header h1 { margin: 0; font-size: 26px; }
+  nav { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+  nav a:hover { background: #2563eb; }
+
+  /* ---------- PAGE TITLE ---------- */
+  section > h2 {
+    width: 90%;
+    margin: 24px auto 10px;
+    color: var(--primary);
+    font-size: 28px;
+  }
+
+  /* ---------- FILTER BUTTONS ---------- */
+  #filterButtons {
+    width: 90%;
+    margin: 10px auto 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  #filterButtons button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  #filterButtons button:hover { background: var(--primary-dark); }
+  #filterButtons button.active { background: var(--primary-dark); }
+
+  /* ---------- EVENT LIST / CARDS ---------- */
+  .event-list {
+    width: 90%;
+    margin: 0 auto 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .event-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: transform 0.22s, box-shadow 0.22s;
+    display: flex;
+    flex-direction: column;
+  }
+  .event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.14);
+  }
+  .event-card img {
+    width: 100%;
+    height: 520px; /* increased height so full image is visible */
+    object-fit: contain; /* shows entire image */
+    background: #000;
+    transition: transform .25s ease;
+  }
+  .event-card:hover img { transform: scale(1.02); }
+  .event-card .info {
+    padding: 20px;
+  }
+  .event-card .info h3 {
+    margin: 0 0 8px;
+    color: var(--primary);
+    font-size: 1.4rem;
+  }
+  .event-card .info p { margin: 0; color: #444; line-height: 1.45; }
+
+  /* ---------- MODALS ---------- */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .modal .modal-content {
+    width: 100%;
+    max-width: 760px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    position: relative;
+    animation: popin .18s ease;
+  }
+  @keyframes popin { from { opacity: 0; transform: scale(.98) } to { opacity: 1; transform: scale(1) } }
+  .modal .close {
+    position: absolute;
+    right: 14px; top: 10px;
+    font-size: 26px;
+    color: #333;
+    cursor: pointer;
+  }
+  .modal h2 { margin-top: 0; color: var(--primary); }
+  .modal p { color: #333; line-height: 1.5; }
+
+  /* ---------- LOGIN MODAL SMALLER ---------- */
+  #loginModal .modal-content { max-width: 420px; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--primary);
+    color: white;
+    padding: 30px 20px;
+  }
+  .footer-container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .footer-location h3 { margin: 0; }
+  .footer-location p { margin: 4px 0 0; font-size: 14px; color: #f0f4ff; }
+  .footer-contact .contact-btn {
+    padding: 10px 18px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  .footer-social { display:flex; gap: 14px; align-items: center; }
+  .footer-social img { width: 28px; height: 28px; display: block; }
+
+  .footer-bottom { margin-top: 10px; font-size: 13px; color: #e6ecff; }
+
+  /* ---------- BACK TO TOP ---------- */
+  #topBtn {
+    display: none;
+    position: fixed;
+    bottom: 26px;
+    right: 26px;
+    z-index: 4000;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary);
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    .event-card img { height: 420px; }
+  }
+  @media (max-width: 600px) {
+    header { padding: 12px 18px; }
+    #filterButtons { width: calc(100% - 32px); margin-left: 16px; }
+    .event-card img { height: 260px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="#">
+    <img class="a" src="galary/logo-cis.jpg" alt="cis club logo" width="150px" height="70px" >
+  </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="events.html">Events</a>
+      <a href="members.html">Join</a>
+      <a href="resource.html">Resources</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="#" id="loginBtn">Login</a>
+    </nav>
+  </header>
+
+  <!-- EVENTS SECTION -->
+  <section>
+    <h2>Upcoming Events</h2>
+
+    <div id="filterButtons">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="workshop">Workshop</button>
+      <button data-filter="seminar">Seminar</button>
+      <button data-filter="competition">Competition</button>
+    </div>
+
+    <div class="event-list" id="eventList"></div>
+  </section>
+
+  <!-- EVENT DESCRIPTION MODAL -->
+  <div id="eventModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <span class="close" id="eventModalClose" title="Close">&times;</span>
+      <h2 id="modalTitle">Event Title</h2>
+      <p id="modalDesc">Event description goes here.</p>
+      <!-- optional: add register button or image later -->
+    </div>
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <span class="close" id="loginModalClose">&times;</span>
+      <h2>Login to CIS Club</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Email" required style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #ccc;">
+        <input type="password" id="loginPassword" placeholder="Password" required style="width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #ccc;">
+        <button type="submit" style="margin-top:8px;padding:10px 16px;background:var(--primary);color:white;border:none;border-radius:8px;cursor:pointer">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-location">
+        <h3>Daffodil International University</h3>
+        <p>Daffodil Smart City (DSC),Birulia, Savar, Dhaka-1216</p>
+      </div>
+
+      <div class="footer-contact">
+        <a class="contact-btn" href="contact.html">Contact Us</a>
+      </div>
+
+       <div class="footer-social">
+            <a href="https://www.facebook.com/CIS.DIU" target="_blank" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+            </a>
+            <a href="https://chat.whatsapp.com/KmBSnW1gGSd1gLxcMAb94D" target="_blank" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+            </a>
+            <a href="mailto:cisclub@diu.edu.bd" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email">
+            </a>
+        </div>
+
+      <div class="footer-bottom">&copy; 2025 CIS Club. All Rights Reserved.</div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="topBtn" title="Back to top">⬆️</button>
+
+<script>
+  // ---------- EVENTS DATA ----------
+  const events = [
+  { title: "Hack the Future", desc: "Seminar on career opportunities, future tech and innovation.", category: "seminar", img: "galary/AI_Fest.jpg "},
+  { title: "Seminar on career and higher study in USA", desc: "Guidance on scholarships, applications, and careers in the USA.", category: "seminar", img:"galary/higher_study_USA.jpg"},
+  { title: "CIS Premier League 2025", desc: "The club's flagship programming competition.", category: "competition", img:"galary/Fun_with_Code_Bootcamp.jpg"},
+  { title: "Fun with Code", desc: "Casual coding games and challenges for learners.", category: "competition", img:"galary/Coding_bootcamp.jpg"},
+  { title: "Prompt Battle", desc: "Creative prompt-writing contest for AI tools and chatbots.", category: "competition", img: "galary/C_bootcamp.jpg" },
+  { title: "CIS Club Enrollment Campaign Fall-2025", desc: "Enrollment & outreach drive — Fall 2025.", category: "workshop", img:" galary/Club_Enrollement_Campaign.jpg" },
+  { title: "CIS Club Enrollment Campaign Spring-2025", desc: "Enrollment & outreach drive — Spring 2025.", category: "workshop", img: "galary/Orientation_Fall_2025.jpg" },
+  { title: "CIS Club Enrollment Campaign Summer-2025", desc: "Enrollment & outreach drive — Summer 2025.", category: "workshop", img:"galary/Orientation_Summer_2025.jpg" },
+  { title: "CIS Club Enrollment Campaign Fall-2024", desc: "Enrollment & outreach drive — Fall 2024.", category: "workshop", img:  "galary/Orientation_Fall_2025.jpg" },
+  { title: "Member Recruitment Spring-2024", desc: "Member recruitment activities — Spring 2024.", category: "workshop", img:"galary/CIS_Futsal.jpg" },
+  { title: "AI Fest 2025", desc: "Workshops, demos and talks on AI innovations.", category: "workshop", img: "galary/WhatsApp Image 2025-12-04 at 12.09.02 PM.jpeg" },
+  { title: "National Language Fest 2025", desc: "Festival celebrating language and culture.", category: "workshop", img: "galary/Language_Fest.jpg"}
+];
+
+
+  // ---------- RENDER EVENTS ----------
+  const eventList = document.getElementById('eventList');
+
+  function renderEvents(filter = 'all') {
+    eventList.innerHTML = '';
+    events.forEach(ev => {
+      if (filter === 'all' || ev.category === filter) {
+        const card = document.createElement('div');
+        card.className = 'event-card';
+        // store title & desc as dataset for accessibility
+        card.dataset.title = ev.title;
+        card.dataset.desc = ev.desc;
+
+        card.innerHTML = `
+          <img src="${ev.img}" alt="${ev.title}">
+          <div class="info">
+            <h3>${ev.title}</h3>
+            <p>${ev.desc}</p>
+          </div>
+        `;
+        // open modal on click
+        card.addEventListener('click', () => openEventModal(ev));
+        eventList.appendChild(card);
+      }
+    });
+  }
+
+  renderEvents();
+
+  // ---------- FILTER BUTTONS ----------
+  document.querySelectorAll('#filterButtons button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#filterButtons button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderEvents(btn.dataset.filter);
+      // scroll to top of list for clarity
+      document.querySelector('section').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // ---------- EVENT MODAL ----------
+  const eventModal = document.getElementById('eventModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const eventModalClose = document.getElementById('eventModalClose');
+
+  function openEventModal(ev) {
+    modalTitle.textContent = ev.title;
+    modalDesc.textContent = ev.desc;
+    eventModal.style.display = 'flex';
+    eventModal.setAttribute('aria-hidden', 'false');
+  }
+  function closeEventModal() {
+    eventModal.style.display = 'none';
+    eventModal.setAttribute('aria-hidden', 'true');
+  }
+  // attach close
+  document.getElementById('eventModal').querySelector('.close').addEventListener('click', closeEventModal);
+
+  // close modals when clicking outside content
+  window.addEventListener('click', (e) => {
+    if (e.target === eventModal) closeEventModal();
+  });
+
+  // ---------- LOGIN MODAL ----------
+  const loginModal = document.getElementById('loginModal');
+  const loginBtn = document.getElementById('loginBtn');
+  const loginModalCloseBtn = document.getElementById('loginModalClose');
+  loginBtn.addEventListener('click', () => { loginModal.style.display = 'flex'; });
+  loginModalCloseBtn.addEventListener('click', () => { loginModal.style.display = 'none'; });
+  window.addEventListener('click', (e) => { if (e.target === loginModal) loginModal.style.display = 'none'; });
+
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    // placeholder - replace with real auth
+    alert('Login submitted');
+    loginModal.style.display = 'none';
+  });
+
+  // ---------- BACK TO TOP ----------
+  const topBtn = document.getElementById('topBtn');
+  window.addEventListener('scroll', () => {
+    topBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+  topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+</script>
+<script src="script.js"></script>
+</body>
+</html>
+
